@@ -1,5 +1,7 @@
 :root {
   --header-background: #2a2f32;
+  --background-keyboard: #f0f0f0;
+  --color-hover-header-buttons: #e4e4e4;
 }
 
 * {
@@ -16,16 +18,26 @@ img {
   width: 100%;
 }
 
+button {
+  border: none;
+}
+
+input:focus {
+  border: none;
+  outline: none;
+}
+
 .container {
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  padding-top: 2rem;
+  /* padding-top: 2rem; */
 }
 .phone {
+  position: relative;
   display: block;
   background: url("../assets/background_whatsapp.png");
-  min-height: 700px;
+  height: 100vh;
 }
 
 /* # HEADER CHAT # */
@@ -66,11 +78,83 @@ img {
   transition: all 0.2s ease;
 }
 .header__utils__icon:hover {
-  background-color: rgba(245, 245, 245, 0.10);
+  background-color: rgba(245, 245, 245, 0.1);
 }
-
-/* # MAIN # */
 
 /* # MAIN CONTENT # */
 
 /* # MAIN KEYBOARD # */
+
+.keyboard {
+  position: absolute;
+  bottom: 0;
+  background-color: var(--background-keyboard);
+}
+
+.keyboard__header {
+  display: grid;
+  padding: 0.5rem 0;
+  grid-template-columns: 50px 1fr 50px;
+}
+.keyboard__header__btn__icon {
+  font-size: 1.5em;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 7px;
+  border-radius: 100%;
+}
+
+.keyboard__header__btn__icon:hover {
+  background-color: var(--color-hover-header-buttons);
+}
+
+.keyboard__header__btn-emoji {
+  color: rgb(94, 94, 94);
+}
+.keyboard__header__btn-send {
+  color: rgb(50, 182, 23);
+}
+
+.keyboard__header__input {
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 30px;
+  padding: 0px 1.3rem;
+  font-size: 1em;
+}
+
+.keyboard__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.1rem 0.3rem 0.3rem 0.3rem;
+}
+
+.keyboard__buttons__key {
+  width: 35px;
+  height: 45px;
+  padding: 0rem;
+  cursor: pointer;
+  font-size: 1.25em;
+  margin: 2px;
+  border-radius: 5px;
+  background-color: rgba(223, 223, 223, 0.692);
+}
+
+.keyboard__buttons__key:hover {
+  background-color: rgb(185, 185, 185);
+}
+.keyboard__buttons__key:active {
+  position: relative;
+  border-top: 2px solid gray;
+  top: 1.5px;
+}
+
+.space-key {
+  flex-grow: 0.6;
+}
+.mayus-key {
+  flex-basis: 45px;
+}
+.delete-key {
+  flex-basis: 45px;
+}
