@@ -1,4 +1,4 @@
-const keys = [
+let keys = [
   { key: "q" },
   { key: "w" },
   { key: "e" },
@@ -19,7 +19,13 @@ const keys = [
   { key: "k" },
   { key: "l" },
   { key: "ñ" },
-  { key: "⇧", specialClass: "mayus-key" },
+  {
+    key: "⇧",
+    specialClass: "mayus-key",
+    functionName: "mayusKey",
+    extraEvents: "ondblclick",
+    extraParameters: true,
+  },
   { key: "z" },
   { key: "x" },
   { key: "c" },
@@ -36,24 +42,50 @@ const keys = [
   { key: "→" },
   { key: "↲" },
 ];
+
+let isMayus = false;
+
+let forceMayus = false;
 const chat = { displayDay: false, messages: [] };
 const inputMessage = document.querySelector("#keyboard__header__input");
 const contentMessages = document.querySelector("#messages");
 
-function renderButtons() {
+function renderButtons(reset) {
   const buttons = document.querySelector("#keyboard__buttons");
-
+  if (reset) {
+    buttons.innerHTML = "";
+  }
   keys.forEach((element) => {
-    buttons.innerHTML += `<button class="keyboard__buttons__key ${
-      element.specialClass || ""
-    }"
-    onclick="pressKey('${element.key}')"
+    buttons.innerHTML += `
+    <button class="keyboard__buttons__key ${element.specialClass || ""}"
+    ${
+      element.functionName
+        ? `onclick="${element.functionName}()"`
+        : `onclick="pressKey('${element.key}')"`
+    }
+    ${
+      element.extraEvents
+        ? `${element.extraEvents}="${element.functionName}(${
+            element.extraParameters && element.extraParameters
+          })"`
+        : ""
+    }
+    
     >${element.key}</button>`;
   });
 }
 
 function pressKey(key) {
-  inputMessage.value += key;
+  if (forceMayus) {
+    inputMessage.value += key;
+    return;
+  }
+  if (isMayus) {
+    inputMessage.value += key;
+    handleKeySize("lower");
+  } else {
+    inputMessage.value += key;
+  }
 }
 
 function sendMessage() {
@@ -94,9 +126,9 @@ function renderMessages() {
 }
 
 function renderDayBox() {
-  const date = new Date()
+  const date = new Date();
   const today = date.getDate();
-  const monthString = date.toLocaleDateString("es", { month: "long" })
+  const monthString = date.toLocaleDateString("es", { month: "long" });
   contentMessages.innerHTML += `<div class="day_chat">${today} de ${monthString} </div>`;
 }
 
@@ -105,4 +137,27 @@ function showDayInChat() {
   return chat.messages.find((msg) => msg.date.day === today) ? false : true;
 }
 
+function mayusKey(dblclick) {
+  if (dblclick) {
+    handleKeySize("upper");
+    forceMayus = true;
+    return;
+  }
+
+  forceMayus ? (forceMayus = false) : forceMayus;
+
+  isMayus ? handleKeySize("lower") : handleKeySize("upper");
+}
+
+function handleKeySize(option) {
+  keys = keys.map((item) => {
+    return option == "upper"
+      ? { ...item, key: item.key.toUpperCase() }
+      : option == "lower"
+      ? { ...item, key: item.key.toLowerCase() }
+      : console.warn("Error pasando los parámetros en la función.");
+  });
+  isMayus = !isMayus;
+  renderButtons(true);
+}
 window.addEventListener("load", renderButtons);
