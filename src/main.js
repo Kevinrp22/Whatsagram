@@ -36,7 +36,7 @@ const keys = [
   { key: "→" },
   { key: "↲" },
 ];
-const messages = [];
+const chat = { displayDay: false, messages: [] };
 const inputMessage = document.querySelector("#keyboard__header__input");
 const contentMessages = document.querySelector("#messages");
 
@@ -61,7 +61,8 @@ function sendMessage() {
   const newMessage = {
     id: 1,
     date: {
-      day: date.toLocaleDateString("es", { weekday: "long" }), // Lunes, martes, miercoles, jueves, viernes, etc..
+      day: date.getDate(),
+      dayString: date.toLocaleDateString("es", { weekday: "long" }), // Lunes, martes, miercoles, jueves, viernes, etc..
       month: date.getMonth(),
       year: date.getFullYear(),
       hour: date.getHours(),
@@ -69,21 +70,39 @@ function sendMessage() {
     },
     message: inputMessage.value,
   };
-  messages.push(newMessage);
-  console.log(messages);
-  inputMessage.value = ""
+  console.log(chat);
+  chat.displayDay = showDayInChat();
+  chat.messages = [...chat.messages, newMessage];
+  inputMessage.value = "";
   renderMessages();
 }
 
 function renderMessages() {
-  messages.forEach((item) => {
-    contentMessages.innerHTML += `
+  contentMessages.innerHTML = "";
+  renderDayBox();
+  chat.messages.forEach((item) => {
+    contentMessages.innerHTML += ` 
     <div class="message">
           <span class="message__text">${item.message}</span>
-          <span class="message__date">${item.date.hour}:${item.date.minute > 10 ? item.date.minute : "0" + item.date.minute}</span>
+          <span class="message__date">${item.date.hour}:${
+      item.date.minute > 10 ? item.date.minute : "0" + item.date.minute
+    }</span>
+    <span class="message__check"><i class="fas fa-check"></i></span>
     </div>
     `;
   });
+}
+
+function renderDayBox() {
+  const date = new Date()
+  const today = date.getDate();
+  const monthString = date.toLocaleDateString("es", { month: "long" })
+  contentMessages.innerHTML += `<div class="day_chat">${today} de ${monthString} </div>`;
+}
+
+function showDayInChat() {
+  const today = new Date().getDate();
+  return chat.messages.find((msg) => msg.date.day === today) ? false : true;
 }
 
 window.addEventListener("load", renderButtons);
