@@ -85,7 +85,7 @@ function renderMessages() {
     <div class="message">
           <span class="message__text">${item.message}</span>
           <span class="message__date">${item.date.hour}:${
-      item.date.minute > 10 ? item.date.minute : "0" + item.date.minute
+      item.date.minute >= 10 ? item.date.minute : "0" + item.date.minute
     }</span>
     <span class="message__check"><i class="fas fa-check"></i></span>
     </div>
