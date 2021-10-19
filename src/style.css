@@ -2,6 +2,7 @@
   --header-background: #2a2f32;
   --background-keyboard: #f0f0f0;
   --color-hover-header-buttons: #e4e4e4;
+  --background-message:#dcf8c6;
 }
 
 * {
@@ -82,7 +83,24 @@ input:focus {
 }
 
 /* # MAIN CONTENT # */
+#messages{
+  display: flex;
+  justify-content: right;
+  padding: 0.5rem;
+}
+.message{
+  text-align: right;
+  background-color: var(--background-message);
+  padding: 0.35rem 0.7rem;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  font-size: 1.1em;
+}
 
+.message__date{
+  font-size: 0.6em;
+  padding-left: 0.2rem;
+}
 /* # MAIN KEYBOARD # */
 
 .keyboard {
@@ -115,14 +133,14 @@ input:focus {
   color: rgb(50, 182, 23);
 }
 
-.keyboard__header__input {
+#keyboard__header__input {
   border: 1px solid rgba(128, 128, 128, 0.3);
   border-radius: 30px;
   padding: 0px 1.3rem;
   font-size: 1em;
 }
 
-.keyboard__buttons {
+#keyboard__buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
