@@ -1,24 +1,24 @@
 ### TODO LIST WHATSAGRAM
 
-- [ ] INTER
-- [] MESSAG
-- [] TEXTAR
-- [] KEYB
+- [x] INTER
+- [x] MESSAG
+- [x] TEXTAR
+- [x] KEYB
 - [ ] EMOJI
 - [ ] CEC
 - [ ] DELECT
-- [ ] MAJUS
+- [x] MAJUS
 - [ ] ESPAI
 - [ ] SALT
 - [ ] GRID
 - [ ] FLEX
 - [ ] RESP
 - [ ] CENTR
-- [ ] KEYS
+- [x] KEYS
 - [ ] FONTS
-- [ ] VARS
-- [ ] STYLE
-- [ ] CORRE
+- [x] VARS
+- [x] STYLE
+- [x] CORRE
 - [ ] SEPAR
 # - EXTRA -
 - [ ] EMOJI
