@@ -44,7 +44,7 @@ let keys = [
   { key: "C", functionName: "deleteValueInputMessage" },
   { key: "CE", functionName: "deleteLastWordInputMessage" },
   { key: "→", functionName: "deleteFirstCharInputMessage" },
-  { key: "↲" },
+  { key: "↲", functionName: "addLineFeedtoInputMessage" },
 ];
 
 let isMayus = false;
@@ -104,7 +104,7 @@ function sendMessage() {
       hour: date.getHours(),
       minute: date.getMinutes(),
     },
-    message: inputMessage.value,
+    message: convertLineFeedHTML(inputMessage.value),
   };
   console.log(chat);
   chat.displayDay = showDayInChat();
@@ -178,7 +178,16 @@ function deleteLastWordInputMessage() {
 function deleteLastCharInputMessage() {
   inputMessage.value = inputMessage.value.slice(0, -1);
 }
+
 function deleteFirstCharInputMessage() {
   inputMessage.value = inputMessage.value.substring(1);
+}
+
+function addLineFeedtoInputMessage() {
+  inputMessage.value += "\n";
+}
+
+function convertLineFeedHTML(txt) {
+  return txt.replaceAll("\n", "<br/>");
 }
 window.addEventListener("load", renderButtons);

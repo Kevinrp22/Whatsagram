@@ -8,8 +8,8 @@
 - [x] CEC
 - [x] DELECT
 - [x] MAJUS
-- [ ] ESPAI
-- [ ] SALT
+- [x] ESPAI
+- [x] SALT
 - [ ] GRID
 - [ ] FLEX
 - [ ] RESP
