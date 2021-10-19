@@ -33,13 +33,17 @@ let keys = [
   { key: "b" },
   { key: "n" },
   { key: "m" },
-  { key: "←", specialClass: "delete-key" },
+  {
+    key: "←",
+    specialClass: "delete-key",
+    functionName: "deleteLastCharInputMessage",
+  },
   { key: "," },
   { key: "‎ ‏", specialClass: "space-key" },
   { key: "." },
   { key: "C", functionName: "deleteValueInputMessage" },
   { key: "CE", functionName: "deleteLastWordInputMessage" },
-  { key: "→" },
+  { key: "→", functionName: "deleteFirstCharInputMessage" },
   { key: "↲" },
 ];
 
@@ -164,9 +168,17 @@ function handleKeySize(option) {
 function deleteValueInputMessage() {
   inputMessage.value = "";
 }
+
 function deleteLastWordInputMessage() {
   const newTextMessage = inputMessage.value.trimEnd().split(" ");
   newTextMessage.pop();
   inputMessage.value = newTextMessage.join(" ");
+}
+
+function deleteLastCharInputMessage() {
+  inputMessage.value = inputMessage.value.slice(0, -1);
+}
+function deleteFirstCharInputMessage() {
+  inputMessage.value = inputMessage.value.substring(1);
 }
 window.addEventListener("load", renderButtons);
