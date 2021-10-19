@@ -5,8 +5,8 @@
 - [x] TEXTAR
 - [x] KEYB
 - [ ] EMOJI
-- [ ] CEC
-- [ ] DELECT
+- [x] CEC
+- [x] DELECT
 - [x] MAJUS
 - [ ] ESPAI
 - [ ] SALT
