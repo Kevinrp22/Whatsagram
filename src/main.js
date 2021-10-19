@@ -37,8 +37,8 @@ let keys = [
   { key: "," },
   { key: "‎ ‏", specialClass: "space-key" },
   { key: "." },
-  { key: "C" },
-  { key: "CE" },
+  { key: "C", functionName: "deleteValueInputMessage" },
+  { key: "CE", functionName: "deleteLastWordInputMessage" },
   { key: "→" },
   { key: "↲" },
 ];
@@ -159,5 +159,14 @@ function handleKeySize(option) {
   });
   isMayus = !isMayus;
   renderButtons(true);
+}
+
+function deleteValueInputMessage() {
+  inputMessage.value = "";
+}
+function deleteLastWordInputMessage() {
+  const newTextMessage = inputMessage.value.trimEnd().split(" ");
+  newTextMessage.pop();
+  inputMessage.value = newTextMessage.join(" ");
 }
 window.addEventListener("load", renderButtons);
