@@ -52,11 +52,19 @@ let emojis = [];
 const chat = { displayDay: false, messages: [] };
 const inputMessage = document.querySelector("#keyboard__header__input");
 const contentMessages = document.querySelector("#messages");
-const content_emojis = document.querySelector("#keyboard__emojis");
+const content_emojis = document.querySelector(".keyboard__emojis");
 
 function initApplication() {
   renderButtons();
-  getEmojis().then((data) => (emojis = data));
+  if (emojis.length == 0) {
+    getEmojis().then((data) => {
+      console.log(data);
+      emojis = data;
+      renderEmojis();
+    });
+  } else {
+    renderEmojis();
+  }
 }
 
 function renderButtons(reset) {
@@ -84,13 +92,17 @@ function renderButtons(reset) {
   });
 }
 
-function renderEmojis(){
-  emojis.forEach(emoji=>{
-    console.log(emoji.character);
-    content_emojis.innerHTML+=`
-    <button class="keyboard__buttons__key>${emoji.character}</button>
-    `
-  })
+function renderEmojis() {
+  const excludeEmojis = "🥸|🥲|☺️|🤌";
+  const numEmojis = 56;
+  emojis
+    .slice(0, numEmojis)
+    .filter((emoji) => emoji.character != excludeEmojis.match(emoji.character))
+    .forEach((emoji) => {
+      content_emojis.innerHTML += `
+    <button class="keyboard__buttons__key" onclick="pressKey('${emoji.character}')">${emoji.character}</button>
+    `;
+    });
 }
 
 function pressKey(key) {
@@ -207,10 +219,25 @@ function convertLineFeedHTML(txt) {
 
 async function getEmojis() {
   const data = await fetch(
-    "https://emoji-api.com/emojis?access_key=b98db0c8c86e9448385fb3e8c72b29b163624cd9"
+    "https://emoji-api.com/emojis?access_key=23cab8034e0163aeb55728b0c324a0e73eb65a52"
   );
 
   return data.json();
 }
 
+function saveEmojis(emojis) {
+  localStorage.setItem("emojis", JSON.stringify(emojis));
+}
+
+function handleEmojiButton() {
+  let emojiButtonClass = document.querySelector("#emoji-icon-btn").classList;
+  emojiButtonClass.toggle("fa-keyboard");
+
+  let buttons_area = window.getComputedStyle(document.querySelector("#keyboard__buttons"),null).display
+  console.log(buttons_area);
+  let emojis_area = document.querySelector(".keyboard__emojis");
+  console.log(buttons_area);
+  buttons_area == "flex" ? (buttons_area = "none") : "";
+  emojis_area.classList.toggle("show");
+}
 window.addEventListener("load", initApplication);

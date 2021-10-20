@@ -28,8 +28,8 @@
       </main>
         <div class="keyboard">
           <div class="keyboard__header">
-            <button class="keyboard__header__btn">
-              <i class="far fa-grin keyboard__header__btn-emoji keyboard__header__btn__icon" ></i>
+            <button class="keyboard__header__btn" onclick="handleEmojiButton()">
+              <i id="emoji-icon-btn" class="far fa-grin keyboard__header__btn-emoji keyboard__header__btn__icon" ></i>
             </button>
             <textarea type="text" id="keyboard__header__input" ></textarea>
             <button class="keyboard__header__btn" onclick="sendMessage()">
@@ -37,7 +37,7 @@
             </button>
           </div>
            <div id="keyboard__buttons"></div> 
-          <div id="keyboard__emojis"></div>
+          <div class="keyboard__emojis"></div>
         </div>
     </div>
   </div>

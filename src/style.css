@@ -157,15 +157,15 @@ input:focus {
 
 #keyboard__header__input {
   border: 1px solid rgba(128, 128, 128, 0.3);
-    border-radius: 30px;
-    padding: 0.6rem 1rem 0rem 1.2rem;
-    font-size: 1em;
-    resize: none;
-    height: 30px;
+  border-radius: 30px;
+  padding: 0.6rem 1rem 0rem 1.2rem;
+  font-size: 1em;
+  resize: none;
+  height: 30px;
 }
 
 #keyboard__buttons {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 0.1rem 0.3rem 0.3rem 0.3rem;
@@ -202,6 +202,9 @@ input:focus {
 }
 
 /* # MAIN KEYBOARD ICONS # */
+.keyboard__emojis {
+  display: none;
+}
 
 .keyboard__emojis__key {
   width: 35px;
@@ -212,4 +215,11 @@ input:focus {
   margin: 2px;
   border-radius: 5px;
   background-color: rgba(223, 223, 223, 0.692);
+}
+
+
+/* SUPPORT CLASS */
+
+.show{
+  display: block;
 }
