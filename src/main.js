@@ -46,13 +46,18 @@ let keys = [
   { key: "→", functionName: "deleteFirstCharInputMessage" },
   { key: "↲", functionName: "addLineFeedtoInputMessage" },
 ];
-
 let isMayus = false;
-
 let forceMayus = false;
+let emojis = [];
 const chat = { displayDay: false, messages: [] };
 const inputMessage = document.querySelector("#keyboard__header__input");
 const contentMessages = document.querySelector("#messages");
+const content_emojis = document.querySelector("#keyboard__emojis");
+
+function initApplication() {
+  renderButtons();
+  getEmojis().then((data) => (emojis = data));
+}
 
 function renderButtons(reset) {
   const buttons = document.querySelector("#keyboard__buttons");
@@ -77,6 +82,15 @@ function renderButtons(reset) {
     
     >${element.key}</button>`;
   });
+}
+
+function renderEmojis(){
+  emojis.forEach(emoji=>{
+    console.log(emoji.character);
+    content_emojis.innerHTML+=`
+    <button class="keyboard__buttons__key>${emoji.character}</button>
+    `
+  })
 }
 
 function pressKey(key) {
@@ -190,4 +204,13 @@ function addLineFeedtoInputMessage() {
 function convertLineFeedHTML(txt) {
   return txt.replaceAll("\n", "<br/>");
 }
-window.addEventListener("load", renderButtons);
+
+async function getEmojis() {
+  const data = await fetch(
+    "https://emoji-api.com/emojis?access_key=b98db0c8c86e9448385fb3e8c72b29b163624cd9"
+  );
+
+  return data.json();
+}
+
+window.addEventListener("load", initApplication);
