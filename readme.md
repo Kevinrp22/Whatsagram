@@ -15,7 +15,7 @@
 - [ ] RESP
 - [ ] CENTR
 - [x] KEYS
-- [ ] FONTS
+- [x] FONTS
 - [x] VARS
 - [x] STYLE
 - [x] CORRE
