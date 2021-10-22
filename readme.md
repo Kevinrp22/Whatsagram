@@ -4,14 +4,14 @@
 - [x] MESSAG
 - [x] TEXTAR
 - [x] KEYB
-- [ ] EMOJI
+- [x] EMOJI
 - [x] CEC
 - [x] DELECT
 - [x] MAJUS
 - [x] ESPAI
 - [x] SALT
 - [ ] GRID
-- [ ] FLEX
+- [x] FLEX
 - [ ] RESP
 - [ ] CENTR
 - [x] KEYS
@@ -19,7 +19,7 @@
 - [x] VARS
 - [x] STYLE
 - [x] CORRE
-- [ ] SEPAR
+- [x] SEPAR
 # - EXTRA -
-- [ ] EMOJI
+- [x] EMOJI
 - [ ] PENJA
