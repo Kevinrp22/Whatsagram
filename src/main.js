@@ -68,7 +68,7 @@ function initApplication() {
 }
 
 function renderButtons(reset) {
-  const buttons = document.querySelector("#keyboard__buttons");
+  const buttons = document.querySelector(".keyboard__buttons");
   if (reset) {
     buttons.innerHTML = "";
   }
@@ -94,7 +94,7 @@ function renderButtons(reset) {
 
 function renderEmojis() {
   const excludeEmojis = "🥸|🥲|☺️|🤌";
-  const numEmojis = 56;
+  const numEmojis = 38;
   emojis
     .slice(0, numEmojis)
     .filter((emoji) => emoji.character != excludeEmojis.match(emoji.character))
@@ -218,9 +218,7 @@ function convertLineFeedHTML(txt) {
 }
 
 async function getEmojis() {
-  const data = await fetch(
-    "https://emoji-api.com/emojis?access_key=23cab8034e0163aeb55728b0c324a0e73eb65a52"
-  );
+  const data = await fetch("emojis.json");
 
   return data.json();
 }
@@ -231,13 +229,11 @@ function saveEmojis(emojis) {
 
 function handleEmojiButton() {
   let emojiButtonClass = document.querySelector("#emoji-icon-btn").classList;
-  emojiButtonClass.toggle("fa-keyboard");
-
-  let buttons_area = window.getComputedStyle(document.querySelector("#keyboard__buttons"),null).display
-  console.log(buttons_area);
+  let buttons_area = document.querySelector(".keyboard__buttons")
   let emojis_area = document.querySelector(".keyboard__emojis");
-  console.log(buttons_area);
-  buttons_area == "flex" ? (buttons_area = "none") : "";
+
+  emojiButtonClass.toggle("fa-keyboard");
+  buttons_area.classList.toggle("hide")
   emojis_area.classList.toggle("show");
 }
 window.addEventListener("load", initApplication);
