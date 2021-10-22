@@ -10,7 +10,7 @@
 - [x] MAJUS
 - [x] ESPAI
 - [x] SALT
-- [ ] GRID
+- [x] GRID
 - [x] FLEX
 - [ ] RESP
 - [ ] CENTR
