@@ -119,14 +119,6 @@ function pressKey(key) {
   }
 }
 
-function drawCaretPosition() {
-  inputMessage.setSelectionRange(0, 0); 
-
-  window.setTimeout(function () {
-    e.setSelectionRange(inputMessage, 0); 
-  }, 0);
-}
-
 function sendMessage() {
   const date = new Date();
   const newMessage = {
