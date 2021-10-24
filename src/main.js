@@ -49,21 +49,25 @@ let keys = [
 let isMayus = false;
 let forceMayus = false;
 let emojis = [];
+let gifs = [];
 const chat = { displayDay: false, messages: [] };
 const inputMessage = document.querySelector("#keyboard__header__input");
 const contentMessages = document.querySelector("#messages");
-const content_emojis = document.querySelector(".keyboard__emojis");
+const content_emojis = document.querySelector(".keyboard__content__emojis");
+const content_gifs = document.querySelector(".keyboard__content__gifs");
 
 function initApplication() {
   renderButtons();
-  if (emojis.length == 0) {
-    getEmojis().then((data) => {
-      emojis = data;
-      renderEmojis();
-    });
-  } else {
+
+  getEmojis().then((data) => {
+    emojis = data;
     renderEmojis();
-  }
+  });
+
+  getGifs().then((data) => {
+    gifs = data.results;
+    renderGifs();
+  });
 }
 
 function renderButtons(reset) {
@@ -110,7 +114,7 @@ function pressKey(key) {
   if (isMayus) handleKeySize("lower");
 }
 
-function sendMessage() {
+function sendMessage(gif) {
   const date = new Date();
   const newMessage = {
     id: 1,
@@ -122,7 +126,10 @@ function sendMessage() {
       hour: date.getHours(),
       minute: date.getMinutes(),
     },
-    message: convertLineFeedHTML(inputMessage.value),
+    message: gif ? false : convertLineFeedHTML(inputMessage.value),
+    media: {
+      gif: gif ?? false,
+    },
   };
   chat.displayDay = showDayInChat();
   chat.messages = [...chat.messages, newMessage];
@@ -134,9 +141,12 @@ function renderMessages() {
   contentMessages.innerHTML = "";
   renderDayBox();
   chat.messages.forEach((item) => {
+    console.log(item);
     contentMessages.innerHTML += ` 
     <div class="message">
-          <span class="message__text">${item.message}</span>
+          <span class="message__text">${
+            item.media.gif ? `<img class="message__gif" src="${item.media.gif}" />` : item.message
+          }</span>
           <span class="message__date">${item.date.hour}:${
       item.date.minute >= 10 ? item.date.minute : "0" + item.date.minute
     }</span>
@@ -223,6 +233,7 @@ function handleEmojiButton() {
   emojiButtonClass.toggle("fa-keyboard");
   buttons_area.classList.toggle("hide");
   emojis_area.classList.toggle("show");
+  content_emojis.classList.toggle("show");
 }
 function moveCusorToBottom() {
   document.querySelector(".keyboard__content_input").scrollTop =
@@ -241,4 +252,37 @@ function changeInputMessageValue(txt) {
   inputMessage.focus();
   reloadChangesTextArea();
 }
+async function getGifs(req) {
+  const KEY = "3E5Z53GVH0XY";
+  const URL = "https://g.tenor.com/v1/search?";
+  const data = await fetch(`${URL}q=${req}&key=${KEY}`);
+  return data.json();
+}
+
+function handleGifsButton() {
+  if (!content_gifs.classList.contains("show")) {
+    content_gifs.classList.toggle("show-grid");
+    content_emojis.classList.toggle("show");
+  }
+}
+
+function handleEmojiArea() {
+  if (!content_emojis.classList.contains("show")) {
+    content_emojis.classList.toggle("show");
+    content_gifs.classList.toggle("show-grid");
+  }
+}
+
+function renderGifs() {
+  gifs.forEach((gif) => {
+    console.log(gif);
+    content_gifs.innerHTML += `
+     <div class="keyboard__content__gifs__box" onclick="sendMessage('${gif.media[0].gif.url}')">
+      <img class="keyboard__content__gifs__gif" src="${gif.media[0].gif.url}"/> 
+     </div>
+
+  `;
+  });
+}
+
 window.addEventListener("load", initApplication);

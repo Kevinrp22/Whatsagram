@@ -43,8 +43,20 @@
               <i class="far fa-paper-plane keyboard__header__btn-send keyboard__header__btn__icon"></i>
             </button>
           </div>
-           <div class="keyboard__buttons"></div> 
-          <div class="keyboard__emojis"></div>
+          <div class="keyboard__buttons"></div> 
+          <div class="keyboard__emojis">
+            <div class="keyboard__content__emojis"></div>
+            <div class="keyboard__content__gifs"></div>
+            <div class="keyboard__selection">
+              <button class="keyboard__header__btn" onclick="handleEmojiArea()">
+                <i id="emoji-icon-btn" class="far fa-grin keyboard__header__btn__icon" ></i>
+              </button>
+              <button class="gif-icon-btn__box keyboard__header__btn" onclick="handleGifsButton()">
+                <img class="gif-icon-btn" src="../assets/gif.png"/>
+              </button>
+            </div>
+          </div>
+        
         </div>
     </div>
   </div>
