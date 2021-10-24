@@ -161,6 +161,9 @@ input:focus {
   resize: none;
   height: 30px;
 }
+#keyboard__header__input:last-child{
+  color: red;
+}
 
 .keyboard__buttons {
   display: flex;

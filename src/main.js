@@ -106,6 +106,7 @@ function renderEmojis() {
 }
 
 function pressKey(key) {
+  inputMessage.focus();
   if (forceMayus) {
     inputMessage.value += key;
     return;
@@ -116,6 +117,14 @@ function pressKey(key) {
   } else {
     inputMessage.value += key;
   }
+}
+
+function drawCaretPosition() {
+  inputMessage.setSelectionRange(0, 0); 
+
+  window.setTimeout(function () {
+    e.setSelectionRange(inputMessage, 0); 
+  }, 0);
 }
 
 function sendMessage() {
@@ -229,11 +238,11 @@ function saveEmojis(emojis) {
 
 function handleEmojiButton() {
   let emojiButtonClass = document.querySelector("#emoji-icon-btn").classList;
-  let buttons_area = document.querySelector(".keyboard__buttons")
+  let buttons_area = document.querySelector(".keyboard__buttons");
   let emojis_area = document.querySelector(".keyboard__emojis");
 
   emojiButtonClass.toggle("fa-keyboard");
-  buttons_area.classList.toggle("hide")
+  buttons_area.classList.toggle("hide");
   emojis_area.classList.toggle("show");
 }
 window.addEventListener("load", initApplication);
