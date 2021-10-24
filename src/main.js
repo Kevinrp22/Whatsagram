@@ -58,7 +58,6 @@ function initApplication() {
   renderButtons();
   if (emojis.length == 0) {
     getEmojis().then((data) => {
-      console.log(data);
       emojis = data;
       renderEmojis();
     });
@@ -106,17 +105,9 @@ function renderEmojis() {
 }
 
 function pressKey(key) {
-  inputMessage.focus();
-  if (forceMayus) {
-    inputMessage.value += key;
-    return;
-  }
-  if (isMayus) {
-    inputMessage.value += key;
-    handleKeySize("lower");
-  } else {
-    inputMessage.value += key;
-  }
+  changeInputMessageValue(inputMessage.value + key);
+  if (forceMayus) return;
+  if (isMayus) handleKeySize("lower");
 }
 
 function sendMessage() {
@@ -133,10 +124,9 @@ function sendMessage() {
     },
     message: convertLineFeedHTML(inputMessage.value),
   };
-  console.log(chat);
   chat.displayDay = showDayInChat();
   chat.messages = [...chat.messages, newMessage];
-  inputMessage.value = "";
+  changeInputMessageValue("");
   renderMessages();
 }
 
@@ -193,25 +183,26 @@ function handleKeySize(option) {
 }
 
 function deleteValueInputMessage() {
-  inputMessage.value = "";
+  changeInputMessageValue("");
 }
 
 function deleteLastWordInputMessage() {
   const newTextMessage = inputMessage.value.trimEnd().split(" ");
   newTextMessage.pop();
-  inputMessage.value = newTextMessage.join(" ");
+  changeInputMessageValue(newTextMessage.join(" "));
 }
 
 function deleteLastCharInputMessage() {
-  inputMessage.value = inputMessage.value.slice(0, -1);
+  changeInputMessageValue(inputMessage.value.slice(0, -1));
 }
 
 function deleteFirstCharInputMessage() {
-  inputMessage.value = inputMessage.value.substring(1);
+  changeInputMessageValue(inputMessage.value.substring(1));
 }
 
 function addLineFeedtoInputMessage() {
-  inputMessage.value += "\n";
+  const newMessage = (inputMessage.value += "\n");
+  changeInputMessageValue(newMessage);
 }
 
 function convertLineFeedHTML(txt) {
@@ -232,5 +223,22 @@ function handleEmojiButton() {
   emojiButtonClass.toggle("fa-keyboard");
   buttons_area.classList.toggle("hide");
   emojis_area.classList.toggle("show");
+}
+function moveCusorToBottom() {
+  document.querySelector(".keyboard__content_input").scrollTop =
+    document.querySelector(".keyboard__content_input").scrollHeight;
+}
+function autoResizeInput() {
+  inputMessage.style.height = "auto";
+  inputMessage.style.height = inputMessage.scrollHeight + "px";
+}
+function reloadChangesTextArea() {
+  autoResizeInput();
+  moveCusorToBottom();
+}
+function changeInputMessageValue(txt) {
+  inputMessage.value = txt;
+  inputMessage.focus();
+  reloadChangesTextArea();
 }
 window.addEventListener("load", initApplication);

@@ -34,7 +34,11 @@
             <button class="keyboard__header__btn" onclick="handleEmojiButton()">
               <i id="emoji-icon-btn" class="far fa-grin keyboard__header__btn-emoji keyboard__header__btn__icon" ></i>
             </button>
-            <textarea type="text" id="keyboard__header__input" ></textarea>
+            <div class="keyboard__box__input">
+              <div class="keyboard__content_input">
+                <textarea type="text" id="keyboard__header__input" rows="1" spellcheck="false" oninput="reloadChangesTextArea()"></textarea>
+              </div>
+            </div>
             <button class="keyboard__header__btn" onclick="sendMessage()">
               <i class="far fa-paper-plane keyboard__header__btn-send keyboard__header__btn__icon"></i>
             </button>
