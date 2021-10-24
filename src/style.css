@@ -100,6 +100,10 @@ input:focus {
   align-items: flex-end;
   padding: 0.5rem;
 }
+
+#messages > .message:nth-of-type(2){
+  margin-top: .8rem;
+}
 .message {
   background-color: var(--background-message);
   padding: 0.2rem 0.4rem 0.2rem 0.9rem;
