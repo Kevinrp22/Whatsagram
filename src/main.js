@@ -224,10 +224,6 @@ async function getEmojis() {
   return data.json();
 }
 
-function saveEmojis(emojis) {
-  localStorage.setItem("emojis", JSON.stringify(emojis));
-}
-
 function handleEmojiButton() {
   let emojiButtonClass = document.querySelector("#emoji-icon-btn").classList;
   let buttons_area = document.querySelector(".keyboard__buttons");
