@@ -39,7 +39,7 @@ input:focus {
 }
 .phone {
   display: grid;
-  grid-template-rows: max-content minmax(250px, 1fr) max-content;
+  grid-template-rows: max-content minmax(150px, 1fr) min-content;
   background: url(../assets/background_whatsapp.png);
   height: 100vh;
 }
@@ -100,6 +100,7 @@ input:focus {
   align-items: flex-end;
   padding: 0.5rem;
   overflow: auto;
+  scroll-behavior: smooth;
 }
 
 #messages > .message:nth-of-type(2) {
@@ -215,8 +216,8 @@ input:focus {
 }
 
 .keyboard__buttons__key {
-  width: 35px;
-  height: 45px;
+  width: 31px;
+  height: 47px;
   padding: 0rem;
   cursor: pointer;
   font-size: 1.25em;

@@ -135,6 +135,7 @@ function sendMessage(gif) {
   chat.messages = [...chat.messages, newMessage];
   changeInputMessageValue("");
   renderMessages();
+  moveViewToLastMessage()
 }
 
 function renderMessages() {
@@ -239,6 +240,11 @@ function moveCusorToBottom() {
   document.querySelector(".keyboard__content_input").scrollTop =
     document.querySelector(".keyboard__content_input").scrollHeight;
 }
+
+function moveViewToLastMessage(){
+  contentMessages.scrollTop = contentMessages.scrollHeight
+}
+
 function autoResizeInput() {
   inputMessage.style.height = "auto";
   inputMessage.style.height = inputMessage.scrollHeight + "px";
