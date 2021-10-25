@@ -99,6 +99,7 @@ input:focus {
   flex-direction: column;
   align-items: flex-end;
   padding: 0.5rem;
+  overflow: auto;
 }
 
 #messages > .message:nth-of-type(2) {
