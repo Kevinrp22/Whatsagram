@@ -115,7 +115,7 @@ function pressKey(key) {
 }
 
 function sendMessage(gif) {
-  if(inputMessage.value == "") return false;
+  if(inputMessage.value == "" && !gif) return false;
   const date = new Date();
   const newMessage = {
     id: 1,
