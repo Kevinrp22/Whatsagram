@@ -16,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  font-size: 16px;
 }
 
 img {
@@ -33,7 +34,7 @@ input:focus {
 
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   margin: 0 auto;
   /* padding-top: 2rem; */
 }
@@ -48,24 +49,24 @@ input:focus {
 
 .header {
   display: grid;
-  grid-template-columns: 70px 1fr 70px;
+  grid-template-columns: 55px 1fr 70px;
   align-items: center;
   background-color: var(--header-background);
-  padding: 0.8rem 1.2rem;
+  padding: 0.7rem 1.2rem;
 }
 .header__name {
   width: max-content;
+  color: white;
+  font-size: 0.9em;
 }
 .header__avatar {
-  width: 45px;
-  height: 45px;
+  width: 2.2125em;
+  height: 2.2125em;
 }
 .header__avatar__img {
   border-radius: 100%;
 }
-.header__name {
-  color: white;
-}
+
 .header__utils {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -181,7 +182,7 @@ input:focus {
   background-color: white;
   border: 1px solid rgba(128, 128, 128, 0.3);
   border-radius: 30px;
-  padding: 0.3rem 1.2rem 0.1rem 1rem;
+  padding: 0.2rem 1.2rem 0.1rem 1rem;
 }
 .keyboard__content_input {
   display: grid;
@@ -216,8 +217,8 @@ input:focus {
 }
 
 .keyboard__buttons__key {
-  width: 31px;
-  height: 47px;
+  width: 1.55em;
+  height: 1.8em;
   padding: 0rem;
   cursor: pointer;
   font-size: 1.25em;
@@ -271,10 +272,10 @@ input:focus {
 /* # MAIN KEYBOARD GIFS # */
 .keyboard__content__gifs {
   display: none;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   padding: 0rem 0.7rem;
   grid-gap: 5px;
-  max-height: 270px;
+  max-height: 135px;
   overflow: auto;
 }
 .keyboard__content__gifs__box {
@@ -312,4 +313,10 @@ input:focus {
 
 .hide {
   display: none;
+}
+
+@media screen and (min-width:450px){
+  body{
+    font-size: 20.2px;
+  }
 }

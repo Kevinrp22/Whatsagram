@@ -97,7 +97,7 @@ function renderButtons(reset) {
 
 function renderEmojis() {
   const excludeEmojis = "🥸|🥲|☺️|🤌";
-  const numEmojis = 38;
+  const numEmojis = 29;
   emojis
     .slice(0, numEmojis)
     .filter((emoji) => emoji.character != excludeEmojis.match(emoji.character))
@@ -135,7 +135,7 @@ function sendMessage(gif) {
   chat.messages = [...chat.messages, newMessage];
   changeInputMessageValue("");
   renderMessages();
-  moveViewToLastMessage()
+  moveViewToLastMessage();
 }
 
 function renderMessages() {
@@ -146,7 +146,9 @@ function renderMessages() {
     contentMessages.innerHTML += ` 
     <div class="message">
           <span class="message__text">${
-            item.media.gif ? `<img class="message__gif" src="${item.media.gif}" />` : item.message
+            item.media.gif
+              ? `<img class="message__gif" src="${item.media.gif}" />`
+              : item.message
           }</span>
           <span class="message__date">${item.date.hour}:${
       item.date.minute >= 10 ? item.date.minute : "0" + item.date.minute
@@ -241,8 +243,8 @@ function moveCusorToBottom() {
     document.querySelector(".keyboard__content_input").scrollHeight;
 }
 
-function moveViewToLastMessage(){
-  contentMessages.scrollTop = contentMessages.scrollHeight
+function moveViewToLastMessage() {
+  contentMessages.scrollTop = contentMessages.scrollHeight;
 }
 
 function autoResizeInput() {
