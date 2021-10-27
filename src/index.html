@@ -14,12 +14,23 @@
 <body>
   <div class="container">
     <div class="phone">
+      <div class="phone__camera">
+        
+        <video id="phone__camera__video"></video>
+        <canvas id="canvas" width="320" height="240"></canvas>
+        <div class="phone__camera__close" onclick="closeCamera()">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="phone__camera__snapshot" onclick="takeASnapshot()">
+          <i class="far fa-circle"></i>
+        </div>
+      </div>
       <header class="header">
         <div class="header__avatar"><img src="https://eu.ui-avatars.com/api/?background=random" alt="" class="header__avatar__img"></div>
         <div class="header__name">Persona no identificada</div>
         <div class="header__utils">
-          <button class="header__utils__icon">
-            <i class="fas fa-video"></i>
+          <button class="header__utils__icon" onclick="showCamera()">
+            <i class="fas fa-camera"></i>
           </button>
           <button class="header__utils__icon">
             <i class="fas fa-phone-alt"></i>
@@ -27,7 +38,6 @@
         </div>
       </header>
       <main id="messages">
-        
       </main>
         <div class="keyboard">
           <div class="keyboard__header">
@@ -57,7 +67,7 @@
             </div>
           </div>
         
-        </div>
+        </div> 
     </div>
   </div>
   <script src="main.js"></script>

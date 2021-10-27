@@ -56,6 +56,8 @@ const contentMessages = document.querySelector("#messages");
 const content_emojis = document.querySelector(".keyboard__content__emojis");
 const content_gifs = document.querySelector(".keyboard__content__gifs");
 
+let video = document.querySelector("#phone__camera__video");
+
 function initApplication() {
   renderButtons();
 
@@ -115,7 +117,7 @@ function pressKey(key) {
 }
 
 function sendMessage(gif) {
-  if(inputMessage.value == "" && !gif) return false;
+  if (inputMessage.value == "" && !gif) return false;
   const date = new Date();
   const newMessage = {
     id: 1,
@@ -133,22 +135,22 @@ function sendMessage(gif) {
     },
   };
   chat.displayDay = showDayInChat();
-  chat.messages = [...chat.messages, newMessage];
+  setMessages(newMessage);
   changeInputMessageValue("");
-  renderMessages();
-  moveViewToLastMessage();
 }
 
 function renderMessages() {
   contentMessages.innerHTML = "";
   renderDayBox();
   chat.messages.forEach((item) => {
-    console.log(item);
+  
     contentMessages.innerHTML += ` 
     <div class="message">
           <span class="message__text">${
             item.media.gif
               ? `<img class="message__gif" src="${item.media.gif}" />`
+              : item.media.photo
+              ? `<img class="message__photo" src="${item.media.photo}" />`
               : item.message
           }</span>
           <span class="message__date">${item.date.hour}:${
@@ -284,7 +286,6 @@ function handleEmojiArea() {
 
 function renderGifs() {
   gifs.forEach((gif) => {
-    console.log(gif);
     content_gifs.innerHTML += `
      <div class="keyboard__content__gifs__box" onclick="sendMessage('${gif.media[0].gif.url}')">
       <img class="keyboard__content__gifs__gif" src="${gif.media[0].gif.url}"/> 
@@ -292,6 +293,66 @@ function renderGifs() {
 
   `;
   });
+}
+
+function showCamera() {
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      window.localStream = stream;
+      video.srcObject = stream;
+      video.play();
+      document.querySelector(".phone__camera").classList.toggle("show");
+    });
+  } else {
+    alert("Tu dispositivo no es compatible para mostrar la cámara");
+  }
+}
+
+function closeCamera() {
+  window.localStream.getTracks().forEach(function (track) {
+    track.stop();
+  });
+   document.querySelector(".phone__camera").classList.toggle("show");
+}
+
+function takeASnapshot() {
+  let canvas = document.querySelector("#canvas");
+  canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+  let image = canvas.toDataURL("image/jpeg", 1.0);
+  sendSnapshot(image);
+  closeCamera();
+}
+
+function sendSnapshot(photo) {
+  const newMessage = {
+    id: 1,
+    date: generateTodaysDate(),
+    message: false,
+    media: {
+      gif: false,
+      photo,
+    },
+  };
+  setMessages(newMessage);
+}
+
+function generateTodaysDate() {
+  const date = new Date();
+  return {
+    day: date.getDate(),
+    dayString: date.toLocaleDateString("es", { weekday: "long" }), // Lunes, martes, miercoles, jueves, viernes, etc..
+    month: date.getMonth(),
+    year: date.getFullYear(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+  };
+}
+
+function setMessages(newMessage) {
+  chat.displayDay = showDayInChat();
+  chat.messages = [...chat.messages, newMessage];
+  renderMessages();
+  moveViewToLastMessage();
 }
 
 window.addEventListener("load", initApplication);
