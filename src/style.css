@@ -42,7 +42,7 @@ input:focus {
   position: relative;
   display: grid;
   grid-template-rows: max-content minmax(150px, 1fr) min-content;
-  background: url(../assets/background_whatsapp.png);
+  background: url("assets/background_whatsapp.png");
   height: 100vh;
 }
 /* # PHONE CAMERA # */
