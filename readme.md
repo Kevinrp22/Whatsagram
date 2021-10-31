@@ -23,3 +23,5 @@
 # - EXTRA -
 - [x] EMOJI
 - [x] PENJA
+# -EXTRA FOR ME
+- [x] CAMERA FUNCTION
