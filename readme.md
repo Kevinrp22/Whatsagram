@@ -12,8 +12,8 @@
 - [x] SALT
 - [x] GRID
 - [x] FLEX
-- [ ] RESP
-- [ ] CENTR
+- [x] RESP
+- [x] CENTR
 - [x] KEYS
 - [x] FONTS
 - [x] VARS
@@ -22,4 +22,4 @@
 - [x] SEPAR
 # - EXTRA -
 - [x] EMOJI
-- [ ] PENJA
+- [x] PENJA
