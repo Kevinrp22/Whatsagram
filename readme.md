@@ -23,5 +23,5 @@
 # - EXTRA -
 - [x] EMOJI
 - [x] PENJA
-# -EXTRA FOR ME
+# - FEATURE MADE BY ME -
 - [x] CAMERA FUNCTION
